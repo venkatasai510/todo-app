@@ -1,0 +1,83 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+section{
+    width: 100%;
+    padding: 100px 0;
+    .container{
+        margin: auto;
+        padding: 0 15px;
+        @media(min-width:1240px){
+            padding: 0px;
+            max-width: 1200px;
+        }
+    }
+    .todo{
+        border-radius: 15px;
+        background: grey;
+        padding: 30px;
+        max-width: 650px;
+        margin: auto;
+        @media (max-width:500px) {
+            padding: 15px 10px; 
+        }
+        h1{
+            font-size: 30px;
+            padding-bottom: 15px;
+            color: #fff;
+        }
+        form#todoForm {
+            width: 100%;
+            display: flex;
+            gap: 10px;
+        }
+        input#enterTask {
+            flex-grow: 1;
+        }
+        #submit{
+            cursor: pointer;
+        }
+        input{
+            padding: 10px 15px;
+            border-radius: 10px;
+            border: none;
+        }
+    }
+    .taskListHeading {
+        padding-top: 20px;
+        h2{
+            font-size: 26px;
+            padding-bottom: 10px;
+            color: #000;
+        }
+        .tasks{
+            display: flex;
+            gap: 10px;
+            padding: 10px 0;
+            .todoList{
+                flex-grow: 1;
+                display: flex;
+                gap: 5px;
+                .check{
+                    width: 30px;
+                }
+            }
+            .text{
+                width: 100%;
+                outline: none;
+            }
+            .edit, .delete{
+                padding: 10px;
+                border-radius: 10px;
+                border: none;
+                cursor: pointer;
+            }
+            .todoActions {
+                display: flex;
+                gap: 5px;
+            }
+        }
+    }
+}
