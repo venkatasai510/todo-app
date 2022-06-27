@@ -16,7 +16,6 @@ form.addEventListener('submit', (e) => {
 
     const taskContent = document.createElement("div");
     taskContent.classList.add('todoList');
-    // taskContent.innerText = task;
 
     const taskCheck = document.createElement("input");
     taskCheck.type = "checkbox";
