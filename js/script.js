@@ -1,45 +1,62 @@
-const form = document.getElementById('todoForm');
-const input = document.getElementById('enterTask');
-const listElemets = document.getElementById('task');
+let form = document.getElementById('todoForm');
+let input = document.getElementById('enterTask');
+let listElemets = document.getElementById('task');
+
+let task ;
+// let inputData;
+//     if(window.localStorage.getItem('list')){
+//         inputData = window.localStorage.getItem('list');
+//     }
+//     console.log(inputData);
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const task = input.value;
+    task = input.value;
+    window.localStorage.setItem('list', task);
 
     if(!task) {
         alert('please enter task');
         return
     }
-
-    const taskElement = document.createElement("div");
+    
+    let taskElement = document.createElement("div");
     taskElement.classList.add('tasks');
 
-    const taskContent = document.createElement("div");
+    let taskContent = document.createElement("div");
     taskContent.classList.add('todoList');
 
-    const taskCheck = document.createElement("input");
+    let taskCheck = document.createElement("input");
     taskCheck.type = "checkbox";
     taskCheck.classList.add("check");
 
-    const taskInput = document.createElement("input");
-    taskInput.value = task;
+    taskCheck.addEventListener('change', (e) => {
+        e.preventDefault();
+        if(taskCheck.checked == true){
+            taskInput.setAttribute("disabled", "true");
+        }else{
+            taskInput.removeAttribute("disabled");
+        }
+    });
+
+    let taskInput = document.createElement("input");
     taskInput.type = "text";
     taskInput.setAttribute("readonly", "readonly");
     taskInput.classList.add("text");
+    taskInput.value = task;
 
     taskContent.appendChild(taskCheck);
     taskContent.appendChild(taskInput);
     taskElement.appendChild(taskContent);
 
 
-    const actionBtns = document.createElement("div");
+    let actionBtns = document.createElement("div");
     actionBtns.classList.add('todoActions');
 
-    const editBtn = document.createElement('button');
+    let editBtn = document.createElement('button');
     editBtn.classList.add('edit');
     editBtn.innerText = "Edit";
 
-    const deleteBtn = document.createElement('button');
+    let deleteBtn = document.createElement('button');
     deleteBtn.classList.add('delete');
     deleteBtn.innerText = "Delete";
 
@@ -66,4 +83,4 @@ form.addEventListener('submit', (e) => {
     deleteBtn.addEventListener('click', (e) => {
         listElemets.removeChild(taskElement);
     });
-})
+});
