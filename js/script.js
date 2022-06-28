@@ -3,11 +3,11 @@ let input = document.getElementById('enterTask');
 let listElemets = document.getElementById('task');
 
 let task ;
-// let inputData;
-//     if(window.localStorage.getItem('list')){
-//         inputData = window.localStorage.getItem('list');
-//     }
-//     console.log(inputData);
+let inputData;
+    if(window.localStorage.getItem('list')){
+        inputData = window.localStorage.getItem('list');
+    }
+    console.log(inputData);
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -42,7 +42,7 @@ form.addEventListener('submit', (e) => {
     taskInput.type = "text";
     taskInput.setAttribute("readonly", "readonly");
     taskInput.classList.add("text");
-    taskInput.value = task;
+    taskInput.value = inputData;
 
     taskContent.appendChild(taskCheck);
     taskContent.appendChild(taskInput);
@@ -83,4 +83,5 @@ form.addEventListener('submit', (e) => {
     deleteBtn.addEventListener('click', (e) => {
         listElemets.removeChild(taskElement);
     });
+
 });
