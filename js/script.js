@@ -9,7 +9,6 @@ let inputData;
         inputData = JSON.parse(window.localStorage.getItem('list'));
         genUI()
     }
-    console.log(inputData);
 
 
 
@@ -24,7 +23,6 @@ submit.addEventListener('click', (e) => {
     }
     genUI();
 });
-// console.log(task);
 function genUI(){
     task = [...inputData];
     document.getElementById("task").innerHTML="";
