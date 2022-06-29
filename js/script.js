@@ -104,5 +104,4 @@ function deleteFn(i) {
     inputData = JSON.parse(window.localStorage.getItem('list'));
 
     genUI()
-    console.log(i)
 }
