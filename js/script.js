@@ -2,6 +2,7 @@ let form = document.getElementById('todoForm');
 let input = document.getElementById('enterTask');
 let listElemets = document.getElementById('task');
 let submit = document.getElementById('submit');
+var inputChangingValue;
 
 let task = [];
 let inputData;
@@ -10,10 +11,13 @@ let inputData;
         genUI()
     }
 
-
-
 submit.addEventListener('click', (e) => {
     e.preventDefault();
+
+    if(!input.value) {
+        alert('please enter task');
+        return
+    }
     
     task.push(input.value);
     window.localStorage.setItem('list', JSON.stringify(task));
@@ -27,50 +31,61 @@ function genUI(){
     task = [...inputData];
     document.getElementById("task").innerHTML="";
     inputData.forEach(function(s, i){
-    var parentElement = document.createElement("div");
+    let parentElement = document.createElement("div");
     parentElement.classList.add('tasks')
 
-    var dataStructure = document.createElement("div");
+    let dataStructure = document.createElement("div");
     dataStructure.classList.add('todoList');
 
-    var checkInput = document.createElement("input");
+    let checkInput = document.createElement("input");
     checkInput.type = "checkbox";
     checkInput.classList.add("check");
     checkInput.addEventListener('change', (e) => {
         e.preventDefault();
         if(checkInput.checked == true){
-            inputData.setAttribute("disabled", "true");
+            createNewInput.setAttribute("disabled", "true");
         }else{
-            inputData.removeAttribute("disabled");
+            createNewInput.removeAttribute("disabled");
         }
     })
 
-    var inputData = document.createElement("input");
-    inputData.type = "text";
-    inputData.setAttribute("readonly", "readonly");
-    inputData.classList.add("text");
-    inputData.value = s;
+    let createNewInput = document.createElement("input");
+    createNewInput.type = "text";
+    createNewInput.setAttribute("readonly", "readonly");
+    createNewInput.classList.add("text");
+    createNewInput.value = s;
+    createNewInput.addEventListener('keyup', (event) => {
+        event.preventDefault();
+        inputChangingValue = event.target.value;
+    });
 
-    var buttons = document.createElement("div");
+    let buttons = document.createElement("div");
     buttons.classList.add("todoActions");
     parentElement.appendChild(dataStructure);
 
-    var editBtn = document.createElement("button");
+    let editBtn = document.createElement("button");
     editBtn.classList.add('edit');
     editBtn.innerText = "Edit";
     editBtn.addEventListener('click', (e) => {  
-        e.preventDefault();
         if(editBtn.innerText == "Edit") {
-            inputData.removeAttribute("readonly");
-            inputData.focus();
+            createNewInput.removeAttribute("readonly");
+            createNewInput.focus();
             editBtn.innerText = "Save";
+
+            inputData.map((val,ind)=>{
+                if(i===ind){
+                    inputChangingValue=val;
+                }
+              
+            })
         }else{
             editBtn.innerText = "Edit";
-            inputData.setAttribute("readonly", "readonly");
+            createNewInput.setAttribute("readonly", "readonly");
+            handleSave(i);
         }
     });
 
-    var deleteBtn = document.createElement('button');
+    let deleteBtn = document.createElement('button');
     deleteBtn.classList.add('delete');
     deleteBtn.innerText = "Delete";
     deleteBtn.addEventListener('click', (e) => {
@@ -79,7 +94,7 @@ function genUI(){
 
     //adding inputs to the todoList class div
     dataStructure.appendChild(checkInput);
-    dataStructure.appendChild(inputData);
+    dataStructure.appendChild(createNewInput);
 
     //adding inputs to the todoList class div
     buttons.appendChild(editBtn);
@@ -95,11 +110,27 @@ function genUI(){
     });
 }
 
+
+function handleSave(index){
+    
+    let temp=inputData && inputData.map((val,ind)=>{
+        if(index===ind){
+            
+            val=inputChangingValue;
+        }
+        return val;
+    })
+    console.log(temp)
+    window.localStorage.setItem("list",JSON.stringify(temp))
+    inputData=JSON.parse(window.localStorage.getItem("list"))
+    genUI();
+}
+
 function deleteFn(i) {
     let latestInputData=[...inputData];
     latestInputData.splice(i, 1);
     window.localStorage.setItem('list', JSON.stringify(latestInputData));
     inputData = JSON.parse(window.localStorage.getItem('list'));
 
-    genUI()
+    genUI();
 }
