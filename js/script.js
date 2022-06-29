@@ -29,15 +29,23 @@ function genUI(){
     task = [...inputData];
     document.getElementById("task").innerHTML="";
     inputData.forEach(function(s, i){
-    var tableRow = document.createElement("div");
-    tableRow.classList.add('tasks')
+    var parentElement = document.createElement("div");
+    parentElement.classList.add('tasks')
 
-    var tableStructure = document.createElement("div");
-    tableStructure.classList.add('todoList');
+    var dataStructure = document.createElement("div");
+    dataStructure.classList.add('todoList');
 
     var checkInput = document.createElement("input");
     checkInput.type = "checkbox";
     checkInput.classList.add("check");
+    checkInput.addEventListener('change', (e) => {
+        e.preventDefault();
+        if(checkInput.checked == true){
+            inputData.setAttribute("disabled", "true");
+        }else{
+            inputData.removeAttribute("disabled");
+        }
+    })
 
     var inputData = document.createElement("input");
     inputData.type = "text";
@@ -47,7 +55,7 @@ function genUI(){
 
     var buttons = document.createElement("div");
     buttons.classList.add("todoActions");
-    tableRow.appendChild(tableStructure);
+    parentElement.appendChild(dataStructure);
 
     var editBtn = document.createElement("button");
     editBtn.classList.add('edit');
@@ -72,18 +80,18 @@ function genUI(){
     })
 
     //adding inputs to the todoList class div
-    tableStructure.appendChild(checkInput);
-    tableStructure.appendChild(inputData);
+    dataStructure.appendChild(checkInput);
+    dataStructure.appendChild(inputData);
 
     //adding inputs to the todoList class div
     buttons.appendChild(editBtn);
     buttons.appendChild(deleteBtn);
 
     //Adding two divs to the parent div
-    tableRow.appendChild(tableStructure);
-    tableRow.appendChild(buttons);
+    parentElement.appendChild(dataStructure);
+    parentElement.appendChild(buttons);
 
-    document.getElementById("task").appendChild(tableRow);
+    document.getElementById("task").appendChild(parentElement);
 
     input.value = '';
     });
@@ -98,4 +106,3 @@ function deleteFn(i) {
     genUI()
     console.log(i)
 }
-
