@@ -71,10 +71,9 @@ function genUI(){
             createNewInput.removeAttribute("readonly");
             createNewInput.focus();
             editBtn.innerText = "Save";
-
             inputData.map((val,ind)=>{
                 if(i===ind){
-                    V=val;
+                    inputChangingValue=val;
                 }
               
             })
@@ -112,7 +111,6 @@ function genUI(){
 
 
 function handleSave(index){
-    
     let temp=inputData && inputData.map((val,ind)=>{
         if(index===ind){
             
