@@ -74,7 +74,7 @@ function genUI(){
 
             inputData.map((val,ind)=>{
                 if(i===ind){
-                    inputChangingValue=val;
+                    V=val;
                 }
               
             })
