@@ -120,7 +120,6 @@ function handleSave(index){
         }
         return val;
     })
-    console.log(temp)
     window.localStorage.setItem("list",JSON.stringify(temp))
     inputData=JSON.parse(window.localStorage.getItem("list"))
     genUI();
