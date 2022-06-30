@@ -76,7 +76,7 @@ function genUI(){
                     inputChangingValue=val;
                 }
               
-            })
+            });
         }else{
             editBtn.innerText = "Edit";
             createNewInput.setAttribute("readonly", "readonly");
@@ -89,17 +89,17 @@ function genUI(){
     deleteBtn.innerText = "Delete";
     deleteBtn.addEventListener('click', (e) => {
         deleteFn(i);
-    })
+    });
 
     //adding inputs to the todoList class div
     dataStructure.appendChild(checkInput);
     dataStructure.appendChild(createNewInput);
 
-    //adding inputs to the todoList class div
+    //adding buttons to the todoList class div
     buttons.appendChild(editBtn);
     buttons.appendChild(deleteBtn);
 
-    //Adding two divs to the parent div
+    //Adding two divs(inputs and buttons) to the parent div
     parentElement.appendChild(dataStructure);
     parentElement.appendChild(buttons);
 
