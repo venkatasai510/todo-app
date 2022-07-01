@@ -3,6 +3,7 @@ let input = document.getElementById('enterTask');
 let listElemets = document.getElementById('task');
 let submit = document.getElementById('submit');
 var inputChangingValue;
+var indexOfInput;
 
 let task = [];
 let inputData;
@@ -75,11 +76,11 @@ function genUI(){
                 if(i===ind){
                     inputChangingValue=val;
                 }
-              
             });
         }else{
             editBtn.innerText = "Edit";
-            createNewInput.setAttribute("readonly", "readonly");
+            createNewInput.setAttribute("readonly", "readonly");  
+            indexOfInput = i;
             handleSave(i);
         }
     });
@@ -113,13 +114,12 @@ function genUI(){
 function handleSave(index){
     let temp=inputData && inputData.map((val,ind)=>{
         if(index===ind){
-            
             val=inputChangingValue;
         }
         return val;
-    })
-    window.localStorage.setItem("list",JSON.stringify(temp))
-    inputData=JSON.parse(window.localStorage.getItem("list"))
+    });
+    window.localStorage.setItem("list",JSON.stringify(temp));
+    inputData=JSON.parse(window.localStorage.getItem("list"));
     genUI();
 }
 
